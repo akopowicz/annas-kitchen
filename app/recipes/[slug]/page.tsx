@@ -1,11 +1,7 @@
 import RecipeDetailsCard from "@/components/recipeDetails/recipeDetailsCard";
 import { createClient } from "@/utils/supabase/server";
 
-export default async function RecipePage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function RecipePage({ params }: { params: Promise<any> }) {
   const supabase = await createClient();
   const slug = (await params).slug;
   const { data: recipes } = await supabase
