@@ -1,4 +1,8 @@
-export default function Ingredient({ ingridient }) {
+export default function Ingredient({
+  ingridient,
+}: {
+  ingridient: { id: string; quantity: string; name: string };
+}) {
   return (
     <div className="text-base flex items-center">
       <input

@@ -11,7 +11,7 @@ import ExtraDetailsCard from "@/components/extraDetailsCard";
 
 // import Star from "./star";
 
-export default function SearchOutput({ recipe }) {
+export default function SearchOutput({ recipe }: { recipe: any }) {
   return (
     <div className="relative flex flex-col w-[85vw] bg-white m-4 rounded-xl shadow-lg overflow-hidden max-w-[400px]">
       <HeartCard recipeId={recipe.id} />
@@ -26,10 +26,10 @@ export default function SearchOutput({ recipe }) {
           <div className="flex gap-2 items-center justify-between">
             <h3 className=" font-bold text-base">{recipe.title}</h3>
             {/* <div> */}
-            <StarsCard stars={recipe.stars} />
+            <StarsCard stars={recipe.stars} size={16} />
             {/* </div> */}
           </div>
-          
+
           <ExtraDetailsCard recipe={recipe} />
         </div>
       </Link>

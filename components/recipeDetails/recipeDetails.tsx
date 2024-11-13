@@ -1,9 +1,27 @@
 import RecipeCardDetails from "../recipeCardDetails";
 import Border from "../border";
-import MulticookerDetails from "./multicookerDetails";
 import StarsCard from "../starsCard";
 
-export default function RecipeDetails({ recipe, ingredients }) {
+interface Recipe {
+  preparation_time: number;
+  difficulty: string;
+  is_multicooker: boolean;
+  multicooker_program?: string;
+  multicooker_time?: number;
+  multicooker_temperature?: number;
+}
+
+interface Ingredient {
+  is_main: boolean;
+}
+
+export default function RecipeDetails({
+  recipe,
+  ingredients,
+}: {
+  recipe: Recipe;
+  ingredients: Ingredient[];
+}) {
   console.log(ingredients);
   let main_ingredients = 0;
   const preparation_time =
@@ -39,7 +57,7 @@ export default function RecipeDetails({ recipe, ingredients }) {
 
         <RecipeCardDetails
           title="Główne składniki:"
-          inscription={main_ingredients}
+          inscription={main_ingredients.toString()}
           justify="justify-start"
           item="items-start"
         />
@@ -50,21 +68,27 @@ export default function RecipeDetails({ recipe, ingredients }) {
 
           <RecipeCardDetails
             title="Tryb:"
-            inscription={recipe.multicooker_program}
+            inscription={recipe.multicooker_program || ""}
             justify="justify-start"
             item="items-start"
           />
 
           <RecipeCardDetails
             title="Czas:"
-            inscription={`${recipe.multicooker_time} min`}
+            inscription={
+              recipe.multicooker_time ? `${recipe.multicooker_time} min` : ""
+            }
             justify="justify-start"
             item="items-start"
           />
 
           <RecipeCardDetails
             title="Temperatura:"
-            inscription={`${recipe.multicooker_temperature}°C`}
+            inscription={
+              recipe.multicooker_temperature
+                ? `${recipe.multicooker_temperature}°C`
+                : ""
+            }
             justify="justify-start"
             item="items-start"
           />
