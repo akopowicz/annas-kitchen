@@ -6,9 +6,13 @@ type Params = {
 
 type RecipePageProps = {
   params: Params;
+  searchParams?: { [key: string]: string | string[] | undefined };
 };
 
-export default async function RecipePage({ params }: RecipePageProps) {
+export default async function RecipePage({
+  params,
+  searchParams,
+}: RecipePageProps) {
   const supabase = await createClient();
   const { slug } = params;
   const { data: recipes } = await supabase
