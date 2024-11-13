@@ -3,12 +3,15 @@ import ConnectSupabaseSteps from "@/components/tutorial/connect-supabase-steps";
 import SignUpUserSteps from "@/components/tutorial/sign-up-user-steps";
 import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 import { createClient } from "@/utils/supabase/server";
+type Props = {
+  params: {
+    slug: string
+  }
+}
 
 export default async function RecipePage({
   params,
-}: {
-  params: { slug: string };
-}) {
+}: Props) {
   const supabase = await createClient();
   const { slug } = params;
   const { data: recipes } = await supabase
