@@ -2,7 +2,7 @@ import RecipeCard from "@/components/recipeCard";
 import SeeAllRecipes from "@/components/seeAllRecipes";
 import Link from "next/link";
 
-export default function RecipesCards({ recipes }) {
+export default function RecipesCards({ recipes }: { recipes: any[] }) {
   console.log(recipes);
   return (
     <div className="flex flex-col gap-4 justify-center items-center relative max-w-[1200px]">

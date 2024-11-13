@@ -12,11 +12,9 @@ export default async function Index() {
     .from("v_all_recipes")
     .select("*", { count: "exact" });
 
-  
-
   return (
     <div className="flex flex-col gap-4 justify-center items-center relative">
-      <RecipesCards recipes={recipes} />
+      <RecipesCards recipes={recipes || []} />
       {/* <RecipesPage /> */}
     </div>
   );

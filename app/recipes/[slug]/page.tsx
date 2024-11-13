@@ -4,14 +4,22 @@ import SignUpUserSteps from "@/components/tutorial/sign-up-user-steps";
 import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 import { createClient } from "@/utils/supabase/server";
 
-export default async function RecipePage({ params }) {
+export default async function RecipePage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const supabase = await createClient();
-  const { slug } = await params;
+  const { slug } = params;
   const { data: recipes } = await supabase
     .from("recipes")
     .select()
     .eq("link", slug);
   console.log(recipes);
+
+  if (!recipes || recipes.length === 0) {
+    return <div>Recipe not found</div>;
+  }
 
   const { data: ingredients } = await supabase
     .from("ingredients")

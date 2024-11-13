@@ -10,7 +10,7 @@ export default function Pagination({
 }: {
   currentPage: number;
   totalPages: number;
-  onPageChange: (page: number) => void;
+  // onPageChange: (page: number) => void;
 }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
