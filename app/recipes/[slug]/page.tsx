@@ -3,7 +3,12 @@ import { createClient } from "@/utils/supabase/server";
 type Params = {
   slug: string;
 };
-export default async function RecipePage({ params }: { params: Params }) {
+
+type RecipePageProps = {
+  params: Params;
+};
+
+export default async function RecipePage({ params }: RecipePageProps) {
   const supabase = await createClient();
   const { slug } = params;
   const { data: recipes } = await supabase
