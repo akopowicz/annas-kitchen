@@ -3,6 +3,11 @@ export default function RecipeCardDetails({
   inscription,
   justify,
   item,
+}: {
+  title: string;
+  inscription: string;
+  justify: string;
+  item: string;
 }) {
   return (
     <div
