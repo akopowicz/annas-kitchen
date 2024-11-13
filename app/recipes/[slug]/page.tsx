@@ -1,14 +1,11 @@
 import RecipeDetailsCard from "@/components/recipeDetails/recipeDetailsCard";
-import ConnectSupabaseSteps from "@/components/tutorial/connect-supabase-steps";
-import SignUpUserSteps from "@/components/tutorial/sign-up-user-steps";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 import { createClient } from "@/utils/supabase/server";
 type Params = {
   slug: string;
 };
 export default async function RecipePage({ params }: { params: Params }) {
   const supabase = await createClient();
-  const slug = params.slug;
+  const { slug } = params;
   const { data: recipes } = await supabase
     .from("recipes")
     .select()
