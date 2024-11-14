@@ -38,7 +38,7 @@ export default function RecipeDetails({
 
   console.log(main_ingredients);
   return (
-    <div className="flex justify-between gap-2 p-6 border-b-2 border-lightOlive">
+    <div className="flex justify-between gap-2 p-6 lg:w-1/2">
       <div className="flex flex-col gap-2">
         <RecipeCardDetails
           title="Łatwość:"
