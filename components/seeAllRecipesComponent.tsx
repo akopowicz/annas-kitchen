@@ -47,7 +47,7 @@ export default function SeeAllRecipesComponent() {
   return (
     <div className="flex flex-col gap-4 justify-center items-center relative">
       {recipes && recipes.length > 0 ? (
-        <ul className="flex flex-col gap-4 justify-center items-center relative max-w-[1200px] xl:flex-row flex-wrap">
+        <ul className="flex flex-col gap-4 justify-center items-center relative max-w-[1200px] lg:flex-row flex-wrap">
           {recipes.map((recipe) => (
             <RecipeCard key={recipe.id} recipe={recipe} />
           ))}

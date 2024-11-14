@@ -5,8 +5,8 @@ import Link from "next/link";
 export default function RecipesCards({ recipes }: { recipes: any[] }) {
   console.log(recipes);
   return (
-    <div className="flex flex-col gap-4 justify-center items-center relative max-w-[1200px]">
-      <div className="w-full flex flex-col gap-4 justify-center items-center relative xl:flex-row flex-wrap">
+    <div className="flex flex-col gap-4 justify-center items-center relative max-w-[1200px] lg:flex-row flex-wrap">
+      <div className="w-full flex flex-col gap-4 justify-center items-center relative lg:flex-row flex-wrap">
         {recipes.map((recipe) => (
           <RecipeCard key={recipe.id} recipe={recipe} />
         ))}
