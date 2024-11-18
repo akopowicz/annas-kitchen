@@ -1,6 +1,4 @@
 import RecipeCardDetails from "../recipeCardDetails";
-import Border from "../border";
-import StarsCard from "../starsCard";
 
 interface Recipe {
   preparation_time: number;
@@ -22,7 +20,6 @@ export default function RecipeDetails({
   recipe: Recipe;
   ingredients: Ingredient[];
 }) {
-  console.log(ingredients);
   let main_ingredients = 0;
   const preparation_time =
     recipe.preparation_time < 60
@@ -30,13 +27,11 @@ export default function RecipeDetails({
       : `${recipe.preparation_time / 60} h`;
 
   ingredients.forEach((ingredient) => {
-    console.log(ingredient.is_main);
     if (ingredient.is_main) {
       main_ingredients += 1;
     }
   });
 
-  console.log(main_ingredients);
   return (
     <div className="flex justify-between gap-2 p-6 lg:w-1/2">
       <div className="flex flex-col gap-2">
@@ -49,7 +44,6 @@ export default function RecipeDetails({
 
         <RecipeCardDetails
           title="Czas:"
-          // inscription={recipe.preparation_time}
           inscription={preparation_time}
           justify="justify-start"
           item="items-start"

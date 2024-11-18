@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { allRecipes } from "@/lib/actions";
 import Pagination from "./pagination";
 import RecipeCard from "./recipeCard";
+import LoadingRecipe from "@/components/loading/loadingRecipe";
 
 export default function SeeAllRecipesComponent() {
   const searchParams = useSearchParams();
@@ -41,13 +42,13 @@ export default function SeeAllRecipesComponent() {
     fetchRecipes();
   }, [page, search]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <LoadingRecipe />;
+  // if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="flex flex-col gap-4 justify-center items-center relative">
+    <div className="flex flex-col gap-4 justify-center items-center relative ">
       {recipes && recipes.length > 0 ? (
-        <ul className="flex flex-col gap-4 justify-center items-center relative max-w-[1200px] lg:flex-row flex-wrap">
+        <ul className="w-full flex flex-col gap-4 justify-center items-center relative max-w-[1200px] md:flex-row flex-wrap ">
           {recipes.map((recipe) => (
             <RecipeCard key={recipe.id} recipe={recipe} />
           ))}

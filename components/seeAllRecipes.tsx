@@ -1,5 +1,5 @@
 import Link from "next/link";
-// import { useSearchParams } from "next/navigation";
+
 export default function seeAllRecipes({ searchTerm, params }: { searchTerm: string; params: any }) {
   return (
     <Link

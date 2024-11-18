@@ -1,7 +1,7 @@
 "use client";
 export default function Error() {
   return (
-    <div>
+    <div className="bg-[#ffffff]">
       <h1>Error</h1>
     </div>
   );

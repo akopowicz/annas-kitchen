@@ -10,7 +10,6 @@ export default function RecipeDetailsCard({
   recipe: any;
   ingredients: any;
 }) {
-  console.log(ingredients);
   return (
     <div className="w-full flex flex-col gap-4 lg:flex lg:justify-center lg:items-center lg:bg-silver">
       <RecipesHeader recipe={recipe} />

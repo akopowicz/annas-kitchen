@@ -6,11 +6,9 @@ import { useRouter } from "next/navigation";
 export default function Pagination({
   currentPage,
   totalPages,
-  //   onPageChange,
 }: {
   currentPage: number;
   totalPages: number;
-  // onPageChange: (page: number) => void;
 }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -21,9 +19,7 @@ export default function Pagination({
   }
 
   const onPageChange = (page: number) => {
-    console.log("click");
     const params = new URLSearchParams(searchParams);
-    console.log(params);
     params.set("page", page.toString());
 
     replace(`${pathname}?${params.toString()}`);

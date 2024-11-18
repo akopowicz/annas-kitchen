@@ -15,7 +15,6 @@ export default function ExtraDetailsCard({
       ? `${recipe.preparation_time} min`
       : `${recipe.preparation_time / 60} h`;
 
-  console.log(recipe.preparation_time / 60);
   return (
     <div className="flex gap-2 items-top justify-between relative mt-6">
       <RecipeCardDetails
@@ -27,7 +26,6 @@ export default function ExtraDetailsCard({
       <Border />
       <RecipeCardDetails
         title="Czas:"
-        // inscription={recipe.preparation_time}
         inscription={inscriptionTime}
         justify="justify-center"
         item="items-center"

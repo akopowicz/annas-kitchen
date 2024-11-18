@@ -7,16 +7,6 @@ export async function searchRecipes(searchTerm: string) {
 
   const { data, error } = await supabase
     .from("v_all_recipes")
-    // .select(`*,ingredients(*)`)
-    // .or(
-    //   `and(title.ilike.%${searchTerm}%),and(dish_type.ilike.%${searchTerm}%),and(ingredients.name.ilike.%${searchTerm}%)`
-    // );
-    //   .from("ingredients")
-    //   .select(`*, ingredients!recipes_id(*)`)
-    //   .or(
-    //     `recipes.title.ilike.%${searchTerm}%,recipes.dish_type.ilike.%${searchTerm}%,ingredients.name.ilike.%${searchTerm}%`
-    //   );
-
     .select()
     .or(`title.ilike.%${searchTerm}%,dish_type.ilike.%${searchTerm}%`)
     .range(0, 5);
@@ -43,21 +33,16 @@ export async function allRecipesWithSearch(
 
 export async function allRecipes(page: number, searchTerm?: string) {
   const supabase = await createClient();
-  const startsFrom = page * 10;
+  const startsFrom = page * 9;
 
   let query = supabase
     .from("v_all_recipes")
     .select()
-    .range(startsFrom, startsFrom + 9); // range should end at `startsFrom + 9` for 10 items per page
+    .range(startsFrom, startsFrom + 8);
 
-  // Apply search filter only if searchTerm is provided
   if (searchTerm) {
     query = query.ilike("search_phrases", `%${searchTerm}%`);
   }
-
-  // const { data: count } = await supabase
-  //   .from("v_all_recipes")
-  //   .select("*", { count: "exact" });
 
   let countQuery = supabase
     .from("v_all_recipes")
@@ -67,11 +52,37 @@ export async function allRecipes(page: number, searchTerm?: string) {
     countQuery = query.ilike("search_phrases", `%${searchTerm}%`);
   }
 
-  // console.log(count?.length);
-
   const { data, error } = await query;
   const { data: count } = await countQuery;
 
   if (error) throw error;
   return [data, count?.length];
+}
+
+export async function getFavourites(page: number, ids: number[]) {
+  const supabase = await createClient();
+  const startsFrom = page * 9;
+
+  if (!ids || ids.length === 0) return [[], 0];
+
+  const query = supabase
+    .from("v_all_recipes")
+    .select("*")
+    .in("id", ids)
+    .range(startsFrom, startsFrom + 8);
+
+  const countQuery = supabase
+    .from("v_all_recipes")
+    .select("*", { count: "exact" })
+    .in("id", ids);
+
+  const { data, error } = await query;
+  const { data: countData, error: countError } = await countQuery;
+
+  if (error || countError) {
+    console.error("Supabase Query Error:", error || countError);
+    throw error || countError;
+  }
+
+  return [data, countData?.length || 0];
 }

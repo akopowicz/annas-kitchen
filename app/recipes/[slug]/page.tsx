@@ -8,7 +8,6 @@ export default async function RecipePage({ params }: { params: Promise<any> }) {
     .from("recipes")
     .select()
     .eq("link", slug);
-  console.log(recipes);
 
   if (!recipes || recipes.length === 0) {
     return <div>Recipe not found</div>;
@@ -19,7 +18,6 @@ export default async function RecipePage({ params }: { params: Promise<any> }) {
     .select()
     .eq("recipes_id", recipes[0].id);
 
-  console.log(ingredients);
 
   return <RecipeDetailsCard recipe={recipes[0]} ingredients={ingredients} />;
 }

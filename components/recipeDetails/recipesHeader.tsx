@@ -7,7 +7,6 @@ export default function RecipesHeader({ recipe }: { recipe: RecipeType }) {
     <header className="w-full relative h-[500px] max-h-[40vh] lg:max-h-[50vh] overflow-hidden ">
       <Image
         src={recipe.image}
-        // src="/food.jpg"
         alt={recipe.title}
         width={500}
         height={500}
@@ -16,7 +15,6 @@ export default function RecipesHeader({ recipe }: { recipe: RecipeType }) {
       />
       <Image
         src={recipe.image}
-        // src="/food.jpg"
         alt={recipe.title}
         width={500}
         height={500}
