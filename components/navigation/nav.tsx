@@ -53,9 +53,6 @@ export default function Nav() {
             <Link href="/recipes?page=1&search=obiad">Obiad</Link>
           </li>
           <li>
-            <Link href="/recipes?page=1&search=4">Najbardziej polecane</Link>
-          </li>
-          <li>
             <Link href="/recipes?page=1&search=multicooker">Multicooker</Link>
           </li>
           <li>

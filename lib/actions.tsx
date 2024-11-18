@@ -31,7 +31,11 @@ export async function allRecipesWithSearch(
   return data;
 }
 
-export async function allRecipes(page: number, searchTerm?: string) {
+export async function allRecipes(
+  page: number,
+  searchTerm?: string,
+  sortBy?: string
+) {
   const supabase = await createClient();
   const startsFrom = page * 9;
 
@@ -44,12 +48,29 @@ export async function allRecipes(page: number, searchTerm?: string) {
     query = query.ilike("search_phrases", `%${searchTerm}%`);
   }
 
+  switch (sortBy) {
+    case "most_liked":
+      query = query.order("stars", { ascending: false });
+      break;
+    case "quickest":
+      query = query.order("preparation_time", { ascending: true });
+      break;
+    case "fewest_ingredients":
+      query = query.order("main_ingredients", { ascending: true });
+      break;
+    case "latest":
+      query = query.order("created_at", { ascending: false });
+      break;
+    default:
+      break;
+  }
+
   let countQuery = supabase
     .from("v_all_recipes")
     .select("*", { count: "exact" });
 
   if (searchTerm) {
-    countQuery = query.ilike("search_phrases", `%${searchTerm}%`);
+    countQuery = countQuery.ilike("search_phrases", `%${searchTerm}%`);
   }
 
   const { data, error } = await query;
@@ -59,17 +80,38 @@ export async function allRecipes(page: number, searchTerm?: string) {
   return [data, count?.length];
 }
 
-export async function getFavourites(page: number, ids: number[]) {
+export async function getFavourites(
+  page: number,
+  ids: number[],
+  sortBy?: string
+) {
   const supabase = await createClient();
   const startsFrom = page * 9;
 
   if (!ids || ids.length === 0) return [[], 0];
 
-  const query = supabase
+  let query = supabase
     .from("v_all_recipes")
     .select("*")
     .in("id", ids)
     .range(startsFrom, startsFrom + 8);
+
+  switch (sortBy) {
+    case "most_liked":
+      query = query.order("stars", { ascending: false });
+      break;
+    case "quickest":
+      query = query.order("preparation_time", { ascending: true });
+      break;
+    case "fewest_ingredients":
+      query = query.order("main_ingredients", { ascending: true });
+      break;
+    case "latest":
+      query = query.order("created_at", { ascending: false });
+      break;
+    default:
+      break;
+  }
 
   const countQuery = supabase
     .from("v_all_recipes")
